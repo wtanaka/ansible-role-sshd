@@ -15,7 +15,10 @@ before_install:
   - sudo apt-get install -y ansible
 
 script:
-  - wget -O- bit.ly/ansibletest | env sh
+  - >
+    wget -O- bit.ly/ansibletest | env
+    DOCKER_IMAGES="ubuntu:12.04 ubuntu:14.04 ubuntu:16.04"
+    sh
 
 after_failure:
   - cat .kitchen/logs/*.log | grep -v '^I, '
